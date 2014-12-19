@@ -1,6 +1,11 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, jsonify
 import nltkserver
+from nltkserver.stemming import stemmer
 application = app = Flask(__name__)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return nltkserver.helpers.ret_failure(404), 404
 
 @app.route('/word_tokenize',methods=['POST'])
 def word_tokenize():
@@ -14,5 +19,9 @@ def sent_tokenize():
 def pos_tag():
     return nltkserver.pos_tag(request.data)
 
+@app.route('/stem/<method>',methods=['POST'])
+def stem(method):
+	return stemmer(method,request.data)    
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
