@@ -21,3 +21,17 @@ def parse_input(data):
 		return data
 	except:
 		return False
+
+def penn_to_wn(tag):
+	if tag in ['n','v','r','a']:
+		return tag
+	elif tag in ['NN', 'NNS', 'NNP', 'NNPS']:
+		return 'n'
+	elif tag in ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']:
+		return 'v'
+	elif tag in ['RB', 'RBR', 'RBS']:
+		return 'r'
+	elif tag in ['JJ', 'JJR', 'JJS']:
+		return 'a'
+	else:
+		return None

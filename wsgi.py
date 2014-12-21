@@ -1,6 +1,6 @@
 from flask import Flask, request, Response, jsonify
 import nltkserver
-from nltkserver.stemming import stemmer
+from nltkserver.stemming import stemmer,lemmatize
 application = app = Flask(__name__)
 
 @app.errorhandler(404)
@@ -21,7 +21,11 @@ def pos_tag():
 
 @app.route('/stem/<method>',methods=['POST'])
 def stem(method):
-	return stemmer(method,request.data)    
+	return stemmer(method,request.data)
+
+@app.route('/lemmatize/<method>',methods=['POST'])
+def lem(method):
+	return lemmatize(method,request.data)     
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
