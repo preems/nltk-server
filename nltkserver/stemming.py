@@ -61,7 +61,7 @@ def lemmatize(method,data):
 			for word in data:
 				try:
 					if type(word) is list:
-						res.append([word,WordnetLm.lemmatize(word[0],penn_to_wn(word[1]))])
+						res.append([word[0],WordnetLm.lemmatize(word[0],penn_to_wn(word[1]))])
 					else:	
 						res.append([word,WordnetLm.lemmatize(word)])
 				except LookupError: 
