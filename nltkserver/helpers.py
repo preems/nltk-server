@@ -34,4 +34,4 @@ def penn_to_wn(tag):
 	elif tag in ['JJ', 'JJR', 'JJS']:
 		return 'a'
 	else:
-		return None
+		return 'n'

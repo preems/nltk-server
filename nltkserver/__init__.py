@@ -1,10 +1,11 @@
 import nltk
 import json
+import os
 from helpers import ret_success
 from helpers import ret_failure
 from helpers import parse_input
 
-nltk.data.path.append('./nltk-data')
+nltk.data.path.append(os.getcwd()+'/nltk-data')
 
 def word_tokenize(data):
 	if data == None:
