@@ -187,7 +187,6 @@ Takes an array of words and return the stem of words. The valid algorithms are '
   Content-Length: 212
   Content-Type: application/json
   Date: Wed, 24 Dec 2014 06:45:29 GMT
-  Server: Werkzeug/0.9.6 Python/2.7.6
 
   {
   "result": [
@@ -210,3 +209,114 @@ Takes an array of words and return the stem of words. The valid algorithms are '
   ], 
   "status": "success"
   }  
+
+Lemmatizing
+===========
+
+.. http:post:: /lemmatize/wordnet
+
+Takes an array of words or words with corressponing POS Tag. POS Tag is optional and by default every word is considered noun. Both Wordnet and Penn style Tags are supported. Example for both of them are below. 
+
+**Example request without POS Tag**:
+
+.. sourcecode:: http
+
+  POST /lemmatize/wordnet HTTP/1.1
+  HOST: example.com
+  Accept: application/json
+
+  [
+    "the", 
+    "buses", 
+    "are", 
+    "crowded"
+  ]
+
+**Example response**:
+
+.. sourcecode:: http
+
+  HTTP/1.1 200 OK
+  Content-Length: 213
+  Content-Type: application/json
+  Date: Sat, 27 Dec 2014 21:19:54 GMT
+
+  {
+  "result": [
+    [
+      "the", 
+      "the"
+    ], 
+    [
+      "buses", 
+      "bus"
+    ], 
+    [
+      "are", 
+      "are"
+    ], 
+    [
+      "crowded", 
+      "crowded"
+    ]
+  ], 
+  "status": "success"
+  }
+
+**Example request with POS Tag**:
+
+.. sourcecode:: http
+
+  POST /lemmatize/wordnet HTTP/1.1
+  HOST: example.com
+  Accept: application/json
+
+  [
+    [
+      "the", 
+      "DT"
+    ], 
+    [
+      "buses", 
+      "NNS"
+    ], 
+    [
+      "are", 
+      "VBP"
+    ], 
+    [
+      "crowded", 
+      "VBN"
+    ]
+  ]
+
+**Example Response**:
+
+.. sourcecode:: http
+
+  HTTP/1.1 200 OK
+  Content-Length: 210
+  Content-Type: application/json
+  Date: Sat, 27 Dec 2014 21:44:28 GMT
+
+  {
+    "result": [
+      [
+        "the", 
+        "the"
+      ], 
+      [
+        "buses", 
+        "bus"
+      ], 
+      [
+        "are", 
+        "be"
+      ], 
+      [
+        "crowded", 
+        "crowd"
+      ]
+    ], 
+    "status": "success"
+  }
