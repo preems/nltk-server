@@ -1,6 +1,7 @@
 from flask import Flask, request, Response, jsonify
 import nltkserver
 from nltkserver.stemming import stemmer,lemmatize
+from nltkserver.stanfordner import tagger
 application = app = Flask(__name__)
 
 @app.errorhandler(404)
@@ -25,7 +26,11 @@ def stem(method):
 
 @app.route('/lemmatize/<method>',methods=['POST'])
 def lem(method):
-	return lemmatize(method,request.data)     
+	return lemmatize(method,request.data) 
+
+@app.route('/stanfordNER',methods=['POST'])
+def nertagger():
+	return tagger(request.data)    
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
