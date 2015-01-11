@@ -38,7 +38,7 @@ Installation of JRE is specific to Operating system your running on. For Ubuntu,
 .. code-block:: bash
   
   $ sudo apt-get update    
-  $ sudo apt-get default-jre
+  $ sudo apt-get install default-jre
 
 
 Run NLTK Server
